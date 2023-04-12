@@ -24,7 +24,7 @@ void setup() {
   size(1280, 720);
   currentWidth = width;
   currentHeight = height;
-  surface.setResizable(true);
+  surface.setResizable(true); // It seems processing 4.2 has a bug where 
   surface.setTitle("Algorithm Practice");
   surface.setIcon(loadImage("CubeVC.png"));
   
