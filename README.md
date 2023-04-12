@@ -1,6 +1,6 @@
 # CFOPPractice
 
-A flashcard style tool for practicing practice CFOP algorithms with links to video examples.
+A flashcard style tool for practicing CFOP algorithms with links to video examples.
 
 **Preview:**
 <br>
