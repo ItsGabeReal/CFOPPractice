@@ -25,7 +25,7 @@ void setup() {
   currentWidth = width;
   currentHeight = height;
   surface.setResizable(true); // It seems processing 4.2 has a bug where 
-  surface.setTitle("Algorithm Practice");
+  surface.setTitle("CFOP Practice");
   surface.setIcon(loadImage("CubeVC.png"));
   
   mainFont = createFont("Montserrat-Bold.ttf", 30);
