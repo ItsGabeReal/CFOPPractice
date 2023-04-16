@@ -253,7 +253,7 @@ void DisplayOLLAlgorithmSelector(int X, int Y, int Height, OLLAlgorithm Algorith
 }
 
 // Every time an algorithm is selected or deselected, we need to check if it's group's checkbox should change
-void DoubleCheckOLLAlgorithmGroupSelction() {
+void UpdateOLLGroupCheckmarks() {
   for(int i = 0; i < ollAlgorithmGroups.length; i++) {
     ollAlgorithmGroups[i].CheckSelection();
   }

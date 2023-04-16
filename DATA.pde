@@ -152,38 +152,39 @@ PLLAlgorithmGroup[] pllAlgorithmGroups = {
 // Current OLL Tab Index -> [#]
 // Current PLL Alg Index -> [#]
 // Current PLL Tab Index -> [#]
-// OLL Panel 1 -> [NAME~tftttftf...]
-// OLL Panel 2 -> [NAME~tttttttt...]
-// OLL Panel 3 -> [NAME~ffffffff...]
-// PLL Panel 1 -> [NAME~tftttftf...]
-// PLL Panel 2 -> [NAME~tttttttt...]
-// PLL Panel 3 -> [NAME~ffffffff...]
+// OLL Tab 1 -> [NAME~tftttftf...]
+// OLL Tab 2 -> [NAME~tttttttt...]
+// OLL Tab 3 -> [NAME~ffffffff...]
+// PLL Tab 1 -> [NAME~tftttftf...]
+// PLL Tab 2 -> [NAME~tttttttt...]
+// PLL Tab 3 -> [NAME~ffffffff...]
 
 void loadSaveFile() {
-  String[] loadFile = loadStrings("settings.txt");
+  String[] loadFile = loadStrings("settings.txt"); //<>//
   
-  // Handle a damaged save file (only check the first 5 lines, the rest are handled when loading the tabs)
-  if(loadFile.length < 5) {
-    println("The settings file looks pretty damaged. This should be fixed the next time you write the file.");
-  }
-  else {
+  // Try to load tab and current selection settings
+  try {
     practiceType = loadFile[0];
     currentOLLAlgorithm = Integer.parseInt(loadFile[1]); // Restore selected oll algorithm
     currentOLLTab = Integer.parseInt(loadFile[2]); // Restore selected oll tab
     currentPLLAlgorithm = Integer.parseInt(loadFile[3]); // Restore selected pll algorithm
     currentPLLTab = Integer.parseInt(loadFile[4]); // Restore selected pll tab
+  } catch (Exception e) {
+    // Failed to load. Set backup values.
+    practiceType = "oll";
+    currentOLLAlgorithm = 0;
+    currentOLLTab = 0;
+    currentPLLAlgorithm = 0;
+    currentPLLTab = 0;
+    println(e);
   }
   
   // Load oll tabs
   for(int tab = 0; tab < ollTabs.length; tab++) {
-    // Handle insufficient tab entries in save file
-    if(tab >= loadFile.length - 5) {
-      println("Not enough oll tab entries. This should be fixed the next time you write the file.");
-      ollTabs[tab].Init("Tab", ollAlgorithms.length); // Initialize it with a genaric name
-    }
-    else {
+    try {
       String[] splittedTabString = loadFile[tab + 5].split("~");
-      ollTabs[tab].Init(splittedTabString[0], ollAlgorithms.length); // Init tab with name and number of selections
+      String tabName = splittedTabString[0];
+      ollTabs[tab].Init(tabName, ollAlgorithms.length);
       
       // Handle missing split symbol
       if(splittedTabString.length < 2) {
@@ -200,20 +201,20 @@ void loadSaveFile() {
         
         ollTabs[tab].selections[i] = splittedTabString[1].charAt(i) == 't';
       }
+    } catch (Exception e) {
+      // Failed to load tab. Create backup tab.
+      ollTabs[tab].Init("Tab", ollAlgorithms.length);
+      println(e);
     }
   }
-  DoubleCheckOLLAlgorithmGroupSelction();
+  UpdateOLLGroupCheckmarks();
   
   // Load pll tabs
   for(int tab = 0; tab < pllTabs.length; tab++) {
-    // Handle insufficient tab entries in save file
-    if(tab >= loadFile.length - ollTabs.length - 5) {
-      println("Not enough pll tab entries. This should be fixed the next time you write the file.");
-      pllTabs[tab].Init("Tab", pllAlgorithms.length); // Initialize it with a genaric name
-    }
-    else {
+    try {
       String[] splittedTabString = loadFile[tab + ollTabs.length + 5].split("~");
-      pllTabs[tab].Init(splittedTabString[0], pllAlgorithms.length); // Init tab with name and number of selections
+      String tabName = splittedTabString[0];
+      pllTabs[tab].Init(tabName, pllAlgorithms.length);
       
       // Handle missing split symbol
       if(splittedTabString.length < 2) {
@@ -230,9 +231,13 @@ void loadSaveFile() {
         
         pllTabs[tab].selections[i] = splittedTabString[1].charAt(i) == 't';
       }
+    } catch (Exception e) {
+      // Failed to load tab. Create backup tab.
+      pllTabs[tab].Init("Tab", pllAlgorithms.length);
+      println(e);
     }
   }
-  DoubleCheckPLLAlgorithmGroupSelction();
+  UpdatePLLGroupCheckmarks();
   
 }
 

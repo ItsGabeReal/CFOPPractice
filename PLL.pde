@@ -318,7 +318,7 @@ if (hoveringEntry) { currentCursorShape = CursorShape.HAND; }
 }
 
 // Every time an algorithm is selected or deselected, we need to check if it's group's checkbox should change
-void DoubleCheckPLLAlgorithmGroupSelction() {
+void UpdatePLLGroupCheckmarks() {
   for(int i = 0; i < pllAlgorithmGroups.length; i++) {
     pllAlgorithmGroups[i].CheckSelection();
   }

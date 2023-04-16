@@ -57,11 +57,11 @@ void SelectionPanel(int X, int Y, int Width, int Height) {
     if(singlePress && hoveringTab && i != currentTabIndex) {
       if(practiceType.equals("oll")) {
         currentOLLTab = i;
-        DoubleCheckOLLAlgorithmGroupSelction();
+        UpdateOLLGroupCheckmarks();
       }
       else {
         currentPLLTab = i;
-        DoubleCheckPLLAlgorithmGroupSelction();
+        UpdatePLLGroupCheckmarks();
       }
       writeSaveFile();
     }
