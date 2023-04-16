@@ -2,7 +2,7 @@
 
 A flashcard style tool for practicing CFOP algorithms.
 
-### [Download](https://github.com/ItsGabeReal/CFOPPractice/releases/download/v1.0.0/CFOPPractice_v1.0.0_windows64.zip)
+### [Download](https://github.com/ItsGabeReal/CFOPPractice/releases/download/v1.0.1/CFOPPractice_v1.0.1_windows64.zip)
 
 ## Features
 - Every OLL and PLL algorithm included.
